@@ -243,6 +243,13 @@ h1, h2, h3 {
   grid-template-columns: var(--activity-bar-width) 0px 0px 1fr;
 }
 
+.editor-layout.collapsed .sidebar,
+.editor-layout.collapsed .resizer {
+  display: none;
+  padding: 0;
+  border: 0;
+}
+
 .editor-header {
   grid-area: header;
   background: rgba(10, 10, 12, 0.8);

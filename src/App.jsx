@@ -19,10 +19,23 @@ function App() {
     { name: 'architecture.txt', content: 'Vertex Core Architecture\n- React Frontend\n- Vite Build System\n- Glassmorphism Design' }
   ]);
 
+  // Sidebar Logic
+  const [activeView, setActiveView] = useState('explorer');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const toggleView = (view) => {
+    if (activeView === view) {
+      setIsSidebarOpen(!isSidebarOpen);
+    } else {
+      setActiveView(view);
+      setIsSidebarOpen(true);
+    }
+  };
+
   // Resizing Logic
   const [sidebarWidth, setSidebarWidth] = useState(260);
   const [isResizing, setIsResizing] = useState(false);
-  const sidebarRef = useRef(null);
 
   const startResizing = (e) => {
     setIsResizing(true);
@@ -34,7 +47,7 @@ function App() {
 
   const resize = (e) => {
     if (isResizing) {
-      const newWidth = e.clientX - 56; // 56 is the fixed width of ActivityBar
+      const newWidth = e.clientX - 56;
       if (newWidth > 150 && newWidth < 600) {
         setSidebarWidth(newWidth);
       }
@@ -67,19 +80,22 @@ function App() {
 
   return (
     <div 
-      className="editor-layout" 
+      className={`editor-layout ${!isSidebarOpen ? 'collapsed' : ''}`} 
       style={{ '--sidebar-width': `${sidebarWidth}px` }}
     >
       {/* Header */}
       <Header activeFile={activeFile} />
 
       {/* Activity Bar */}
-      <ActivityBar />
+      <ActivityBar activeView={activeView} onViewToggle={toggleView} />
 
       {/* Sidebar / Explorer */}
       <Sidebar 
         notes={notes} 
         activeFile={activeFile} 
+        activeView={activeView}
+        searchQuery={searchQuery}
+        onSearchQueryChange={setSearchQuery}
         onSelectFile={selectFile} 
       />
 
