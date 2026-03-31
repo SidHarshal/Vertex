@@ -366,6 +366,9 @@ h1, h2, h3 {
   background: transparent;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .editor-tabs {
@@ -452,10 +455,11 @@ h1, h2, h3 {
 
 .editor-view-container {
   flex: 1;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* Ensures internal flex scrolling works */
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .editor-content {
@@ -598,6 +602,7 @@ h1, h2, h3 {
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 40px 40px;
+  height: 100%;
 }
 
 .profile-header {

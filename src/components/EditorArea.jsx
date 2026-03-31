@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Settings from './Settings';
 
-const EditorArea = ({ activeFile, content, onContentChange, isEditMode, onModeToggle }) => {
+const EditorArea = ({ activeFile, content, onContentChange, isEditMode, onModeToggle, onAppBackgroundUpdate }) => {
   const isSettings = activeFile === 'Settings';
 
   return (
@@ -50,7 +50,7 @@ const EditorArea = ({ activeFile, content, onContentChange, isEditMode, onModeTo
 
       <div className="editor-view-container">
         {isSettings ? (
-          <Settings />
+          <Settings onAppBackgroundUpdate={onAppBackgroundUpdate} />
         ) : isEditMode ? (
           <textarea 
             className="editor-content"
