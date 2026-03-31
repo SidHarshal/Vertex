@@ -19,7 +19,7 @@
   --header-height: 48px;
   --footer-height: 28px;
   --activity-bar-width: 56px;
-  --sidebar-width: 260px;
+  --sidebar-width: 260px; /* Default sidebar width */
 }
 
 * {
@@ -228,14 +228,19 @@ h1, h2, h3 {
 .editor-layout {
   display: grid;
   grid-template-areas:
-    "header header header"
-    "activity sidebar main"
-    "footer footer footer";
+    "header header header header"
+    "activity sidebar resizer main"
+    "footer footer footer footer";
   grid-template-rows: var(--header-height) 1fr var(--footer-height);
-  grid-template-columns: var(--activity-bar-width) var(--sidebar-width) 1fr;
+  grid-template-columns: var(--activity-bar-width) var(--sidebar-width) auto 1fr;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  transition: grid-template-columns 0.2s ease-in-out;
+}
+
+.editor-layout.collapsed {
+  grid-template-columns: var(--activity-bar-width) 0px 0px 1fr;
 }
 
 .editor-header {
@@ -277,6 +282,20 @@ h1, h2, h3 {
   background: rgba(255, 255, 255, 0.01);
   border-right: 1px solid var(--glass-border);
   padding: 1rem;
+  overflow: hidden;
+}
+
+.resizer {
+  grid-area: resizer;
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background 0.2s;
+  z-index: 10;
+}
+
+.resizer:hover, .resizer.dragging {
+  background: var(--primary-light);
 }
 
 .sidebar-title {

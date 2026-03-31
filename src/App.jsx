@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './index.css';
 
 // Components
@@ -19,6 +19,42 @@ function App() {
     { name: 'architecture.txt', content: 'Vertex Core Architecture\n- React Frontend\n- Vite Build System\n- Glassmorphism Design' }
   ]);
 
+  // Resizing Logic
+  const [sidebarWidth, setSidebarWidth] = useState(260);
+  const [isResizing, setIsResizing] = useState(false);
+  const sidebarRef = useRef(null);
+
+  const startResizing = (e) => {
+    setIsResizing(true);
+  };
+
+  const stopResizing = () => {
+    setIsResizing(false);
+  };
+
+  const resize = (e) => {
+    if (isResizing) {
+      const newWidth = e.clientX - 56; // 56 is the fixed width of ActivityBar
+      if (newWidth > 150 && newWidth < 600) {
+        setSidebarWidth(newWidth);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isResizing) {
+      window.addEventListener('mousemove', resize);
+      window.addEventListener('mouseup', stopResizing);
+    } else {
+      window.removeEventListener('mousemove', resize);
+      window.removeEventListener('mouseup', stopResizing);
+    }
+    return () => {
+      window.removeEventListener('mousemove', resize);
+      window.removeEventListener('mouseup', stopResizing);
+    };
+  }, [isResizing]);
+
   const selectFile = (fileName) => {
     const note = notes.find(n => n.name === fileName);
     setActiveFile(fileName);
@@ -30,7 +66,10 @@ function App() {
   }
 
   return (
-    <div className="editor-layout">
+    <div 
+      className="editor-layout" 
+      style={{ '--sidebar-width': `${sidebarWidth}px` }}
+    >
       {/* Header */}
       <Header activeFile={activeFile} />
 
@@ -42,6 +81,12 @@ function App() {
         notes={notes} 
         activeFile={activeFile} 
         onSelectFile={selectFile} 
+      />
+
+      {/* Resizer Handle */}
+      <div 
+        className={`resizer ${isResizing ? 'dragging' : ''}`} 
+        onMouseDown={startResizing}
       />
 
       {/* Main Editor */}
