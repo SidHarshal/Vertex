@@ -1,64 +1,93 @@
 import React from 'react';
-import { User, Palette, Shield, Info } from 'lucide-react';
+import { 
+  Box, LayoutGrid, Users, Tag, FolderOpen, 
+  Files, Target, Puzzle, UserCircle, Bell, 
+  ShieldCheck, Key, Keyboard, ChevronDown, CheckCircle2 
+} from 'lucide-react';
+import avatarImg from '../assets/avatar.png';
 
 const Settings = () => {
   return (
-    <div className="editor-content animate-fade-in" style={{ padding: '3rem', maxWidth: '800px', margin: '0 auto' }}>
-      <h2 className="text-2xl mb-8 gradient-text">Vertex Settings</h2>
-      
-      {/* Account Section */}
-      <section className="mb-10">
-        <div className="flex items-center gap-3 mb-6" style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.8rem' }}>
-          <User size={20} className="text-primary-light" />
-          <h3 className="text-xl">Account Configuration</h3>
-        </div>
-        <div className="glass p-6 flex flex-column gap-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="font-semibold">Professional Profile</div>
-              <div className="text-muted text-sm">Managing core account identities and sync.</div>
-            </div>
-            <button className="btn-glass" style={{ padding: '0.4rem 1rem', fontSize: '0.8rem' }}>Edit Profile</button>
-          </div>
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="font-semibold">Security Level</div>
-              <div className="text-muted text-sm">Enterprise-grade MFA is active.</div>
-            </div>
-            <Shield size={18} className="text-secondary" />
-          </div>
-        </div>
-      </section>
+    <div className="settings-container animate-fade-in">
+      {/* Settings Sub-Sidebar */}
+      <aside className="settings-sidebar">
+        <div className="settings-sidebar-header">Settings</div>
+        
+        <nav>
+          <div className="settings-nav-item"><Box size={18} /> Workspace</div>
+          <div className="settings-nav-item"><LayoutGrid size={18} /> Overview</div>
+          <div className="settings-nav-item"><Users size={18} /> Members</div>
+          <div className="settings-nav-item"><Tag size={18} /> Label</div>
+          <div className="settings-nav-item"><FolderOpen size={18} /> Projects</div>
+          <div className="settings-nav-item"><Files size={18} /> Templates</div>
+          <div className="settings-nav-item"><Target size={18} /> Initiatives</div>
+          <div className="settings-nav-item"><Puzzle size={18} /> Integrations</div>
+        </nav>
 
-      {/* Theme Section */}
-      <section className="mb-10">
-        <div className="flex items-center gap-3 mb-6" style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.8rem' }}>
-          <Palette size={20} className="text-primary-light" />
-          <h3 className="text-xl">Visual Preferences</h3>
+        <div className="settings-sidebar-header" style={{ marginTop: '2rem' }}>
+          My Account <ChevronDown size={14} style={{ marginLeft: 'auto' }}/>
         </div>
-        <div className="grid gap-4">
-          <div className="glass p-4 text-center glass-hover cursor-pointer border-primary-light" style={{ borderColor: 'var(--primary-light)' }}>
-            <div className="font-bold mb-1">Vertex Dark (Default)</div>
-            <div className="text-xs text-muted">Deep violet & cyan mesh</div>
-          </div>
-          <div className="glass p-4 text-center glass-hover cursor-pointer">
-            <div className="font-bold mb-1">Cyberpunk</div>
-            <div className="text-xs text-muted">Neon yellow & hot pink</div>
-          </div>
-          <div className="glass p-4 text-center glass-hover cursor-pointer">
-            <div className="font-bold mb-1">Minimalist</div>
-            <div className="text-xs text-muted">Muted greys & soft whites</div>
-          </div>
-        </div>
-      </section>
+        <nav>
+          <div className="settings-nav-item active"><UserCircle size={18} /> Profile</div>
+          <div className="settings-nav-item"><Bell size={18} /> Notifications</div>
+          <div className="settings-nav-item"><ShieldCheck size={18} /> Security & Access</div>
+          <div className="settings-nav-item"><Key size={18} /> API Keys</div>
+          <div className="settings-nav-item"><Keyboard size={18} /> Keyboard shortcuts</div>
+        </nav>
+      </aside>
 
-      {/* Info Section */}
-      <section style={{ opacity: 0.5, marginTop: '4rem' }}>
-        <div className="flex items-center gap-2 text-sm justify-center">
-          <Info size={14} />
-          Vertex V1.0.0 &bull; Built with Agentic Power
+      {/* Main Settings Content */}
+      <main className="settings-content-area">
+        {/* Internal Breadcrumb */}
+        <div className="flex items-center gap-2 text-sm mb-10" style={{ opacity: 0.6 }}>
+          My Account / <UserCircle size={14} /> Profile
         </div>
-      </section>
+
+        {/* Profile Header */}
+        <div className="profile-header">
+          <img src={avatarImg} alt="Emily Johnson" className="profile-avatar" />
+          <div>
+            <h2 className="profile-name">
+              Emily Johnson <CheckCircle2 size={24} color="#3b82f6" fill="#3b82f6" style={{ filter: 'brightness(1.2)' }} />
+            </h2>
+            <p className="profile-email">johnson@example.com</p>
+          </div>
+        </div>
+
+        {/* Personal Details Card */}
+        <div className="details-card">
+          <div className="details-header">Personal details</div>
+          
+          <div className="details-row">
+            <span className="details-label">Full name:</span>
+            <span className="details-value">Emily Johnson</span>
+          </div>
+          <div className="details-row">
+            <span className="details-label">Date of Birth:</span>
+            <span className="details-value">January 1, 1987</span>
+          </div>
+          <div className="details-row">
+            <span className="details-label">Gender:</span>
+            <span className="details-value">Female</span>
+          </div>
+          <div className="details-row">
+            <span className="details-label">Nationality:</span>
+            <span className="details-value">American</span>
+          </div>
+          <div className="details-row">
+            <span className="details-label">Address:</span>
+            <span className="details-value">🇺🇸 California - United States</span>
+          </div>
+          <div className="details-row">
+            <span className="details-label">Phone Number:</span>
+            <span className="details-value">(213) 555-1234</span>
+          </div>
+          <div className="details-row">
+            <span className="details-label" style={{ borderBottom: 'none' }}>Email:</span>
+            <span className="details-value" style={{ borderBottom: 'none' }}>johnson@example.com</span>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
