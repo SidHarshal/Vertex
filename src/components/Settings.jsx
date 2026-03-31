@@ -73,7 +73,7 @@ const Settings = ({ onAppBackgroundUpdate }) => {
               <img src={avatarImg} alt="Emily Johnson" className="profile-avatar" />
               <div>
                 <h2 className="profile-name">
-                  Emily Johnson <CheckCircle2 size={24} color="#3b82f6" fill="#3b82f6" style={{ filter: 'brightness(1.2)' }} />
+                  Emily Johnson <CheckCircle2 size={24} color="#3b82f6" style={{ filter: 'brightness(1.1)' }} />
                 </h2>
                 <p className="profile-email">johnson@example.com</p>
               </div>
@@ -107,8 +107,8 @@ const Settings = ({ onAppBackgroundUpdate }) => {
                 <span className="details-value">(213) 555-1234</span>
               </div>
               <div className="details-row">
-                <span className="details-label" style={{ borderBottom: 'none' }}>Email:</span>
-                <span className="details-value" style={{ borderBottom: 'none' }}>johnson@example.com</span>
+                <span className="details-label">Email:</span>
+                <span className="details-value">johnson@example.com</span>
               </div>
             </div>
           </>
@@ -119,41 +119,49 @@ const Settings = ({ onAppBackgroundUpdate }) => {
               My Account / <Palette size={14} /> Appearance
             </div>
 
-            <h1 className="text-4xl mb-10 gradient-text font-bold">Appearance</h1>
+            <div className="profile-header">
+              <div className="profile-avatar flex items-center justify-center p-0" style={{ background: 'rgba(147, 51, 234, 0.1)', borderStyle: 'dashed' }}>
+                <Palette size={64} className="text-primary-light" />
+              </div>
+              <div>
+                <h2 className="profile-name">Appearance</h2>
+                <p className="profile-email">Personalize your specialized workspace environment</p>
+              </div>
+            </div>
 
             {/* Background Section */}
-            <section className="mb-10">
-              <div className="section-header">
-                <Monitor size={20} className="text-secondary" />
-                <h3 className="text-xl">Application Background</h3>
+            <div className="details-card mb-10">
+              <div className="details-header flex items-center gap-2">
+                <Monitor size={18} className="text-secondary" />
+                Application Background
               </div>
-              <div className="glass p-8 text-center" style={{ background: 'rgba(255,255,255,0.02)' }}>
+              <div className="p-12 text-center">
                 <p className="text-muted mb-6">Choose an image to customize your specialized workspace environment.</p>
-                <label className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.8rem', padding: '0.8rem 2.5rem' }}>
+                <label className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.8rem', padding: '0.8rem 2.8rem' }}>
                   <Upload size={20} />
                   Upload Photo
                   <input type="file" hidden accept="image/*" onChange={handleBackgroundUpload} />
                 </label>
               </div>
-            </section>
+            </div>
 
             {/* Font Section */}
-            <section className="mb-10">
-              <div className="section-header">
-                <Type size={20} className="text-secondary" />
-                <h3 className="text-xl">Font Personalization</h3>
+            <div className="details-card mb-10">
+              <div className="details-header flex items-center gap-2">
+                <Type size={18} className="text-secondary" />
+                Font Personalization
               </div>
-              <div className="font-grid">
-                <div className="glass p-6 border-primary-light" style={{ borderColor: 'var(--primary-light)', cursor: 'pointer', background: 'rgba(255,255,255,0.02)' }}>
+              <div className="font-grid p-8">
+                <div className="details-card p-6" style={{ borderColor: 'var(--primary-light)', cursor: 'pointer', background: 'rgba(147, 51, 234, 0.05)' }}>
                   <div className="font-bold text-lg mb-1">Inter (Default)</div>
                   <div className="text-sm text-muted">Clean, modern geometric sans-serif for optimal readability.</div>
                 </div>
-                <div className="glass p-6 glass-hover" style={{ cursor: 'pointer', background: 'rgba(255,255,255,0.02)' }}>
+                <div className="details-card p-6 glass-hover" style={{ cursor: 'pointer' }}>
                   <div className="font-bold text-lg mb-1" style={{ fontFamily: 'var(--font-mono)' }}>JetBrains Mono</div>
                   <div className="text-sm text-muted">Specialized developer-centric typeface with improved ligatures.</div>
                 </div>
               </div>
-            </section>
+            </div>
 
             {/* Reset Button */}
             <div className="mt-10">
