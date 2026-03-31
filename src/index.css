@@ -19,7 +19,7 @@
   --header-height: 48px;
   --footer-height: 28px;
   --activity-bar-width: 56px;
-  --sidebar-width: 260px;
+  --sidebar-width: 260px; /* Default sidebar width */
 }
 
 * {
@@ -228,14 +228,26 @@ h1, h2, h3 {
 .editor-layout {
   display: grid;
   grid-template-areas:
-    "header header header"
-    "activity sidebar main"
-    "footer footer footer";
+    "header header header header"
+    "activity sidebar resizer main"
+    "footer footer footer footer";
   grid-template-rows: var(--header-height) 1fr var(--footer-height);
-  grid-template-columns: var(--activity-bar-width) var(--sidebar-width) 1fr;
+  grid-template-columns: var(--activity-bar-width) var(--sidebar-width) auto 1fr;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  transition: grid-template-columns 0.2s ease-in-out;
+}
+
+.editor-layout.collapsed {
+  grid-template-columns: var(--activity-bar-width) 0px 0px 1fr;
+}
+
+.editor-layout.collapsed .sidebar,
+.editor-layout.collapsed .resizer {
+  display: none;
+  padding: 0;
+  border: 0;
 }
 
 .editor-header {
@@ -277,6 +289,20 @@ h1, h2, h3 {
   background: rgba(255, 255, 255, 0.01);
   border-right: 1px solid var(--glass-border);
   padding: 1rem;
+  overflow: hidden;
+}
+
+.resizer {
+  grid-area: resizer;
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background 0.2s;
+  z-index: 10;
+}
+
+.resizer:hover, .resizer.dragging {
+  background: var(--primary-light);
 }
 
 .sidebar-title {
@@ -337,8 +363,16 @@ h1, h2, h3 {
 
 .editor-tabs {
   display: flex;
+  align-items: center;
   background: rgba(0, 0, 0, 0.2);
-  height: 35px;
+  height: 38px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.tabs-container {
+  display: flex;
+  height: 100%;
 }
 
 .tab {
@@ -350,6 +384,7 @@ h1, h2, h3 {
   background: rgba(255, 255, 255, 0.02);
   color: var(--text-muted);
   cursor: pointer;
+  gap: 0.5rem;
 }
 
 .tab.active {
@@ -358,17 +393,121 @@ h1, h2, h3 {
   border-top: 1px solid var(--primary-light);
 }
 
+.tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  opacity: 0.5;
+}
+
+.tab-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tab-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.tab-add:hover {
+  color: var(--text-main);
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  color: var(--text-muted);
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.action-btn:hover {
+  color: var(--primary-light);
+}
+
 .editor-content {
   flex: 1;
-  padding: 2rem;
+  padding: 2.5rem;
   font-family: var(--font-mono);
   font-size: 1rem;
   color: var(--text-main);
-  line-height: 1.6;
+  line-height: 1.7;
   outline: none;
   background: transparent;
   border: none;
   resize: none;
+  scroll-padding-top: 1rem;
+}
+
+.preview-content {
+  flex: 1;
+  padding: 2.5rem 4rem;
+  overflow-y: auto;
+  color: var(--text-main);
+  line-height: 1.8;
+  font-family: var(--font-sans);
+}
+
+.preview-content h1, 
+.preview-content h2, 
+.preview-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.5rem;
+}
+
+.preview-content p {
+  margin-bottom: 1.5rem;
+}
+
+.preview-content ul, 
+.preview-content ol {
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.preview-content code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.preview-content pre {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--glass-border);
+}
+
+.preview-content blockquote {
+  border-left: 4px solid var(--primary-light);
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 2rem 0;
 }
 
 .editor-footer {
@@ -378,8 +517,8 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.8rem;
-  font-size: 0.7rem;
+  padding: 0 1.5rem;
+  font-size: 0.75rem;
   font-weight: 500;
 }
 
