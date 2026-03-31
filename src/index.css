@@ -290,6 +290,13 @@ h1, h2, h3 {
   border-right: 1px solid var(--glass-border);
   padding: 1rem;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.explorer-list {
+  flex: 1;
+  overflow-y: auto;
 }
 
 .resizer {
@@ -443,6 +450,14 @@ h1, h2, h3 {
   color: var(--primary-light);
 }
 
+.editor-view-container {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Ensures internal flex scrolling works */
+}
+
 .editor-content {
   flex: 1;
   padding: 2.5rem;
@@ -455,6 +470,7 @@ h1, h2, h3 {
   border: none;
   resize: none;
   scroll-padding-top: 1rem;
+  overflow-y: auto;
 }
 
 .preview-content {
@@ -528,6 +544,7 @@ h1, h2, h3 {
   height: 100%;
   width: 100%;
   background: #0a0a0c;
+  min-height: 0; /* Ensures internal flex scrolling works */
 }
 
 .settings-sidebar {
@@ -539,6 +556,7 @@ h1, h2, h3 {
   flex-direction: column;
   gap: 0.5rem;
   overflow-y: auto;
+  height: 100%;
 }
 
 .settings-sidebar-header {

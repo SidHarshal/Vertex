@@ -48,7 +48,7 @@ const EditorArea = ({ activeFile, content, onContentChange, isEditMode, onModeTo
         </div>
       </div>
 
-      <div className="editor-view-container" style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+      <div className="editor-view-container">
         {isSettings ? (
           <Settings />
         ) : isEditMode ? (
@@ -60,7 +60,7 @@ const EditorArea = ({ activeFile, content, onContentChange, isEditMode, onModeTo
             spellCheck="false"
           />
         ) : (
-          <div className="preview-content animate-fade-in">
+          <div className="preview-content animate-fade-in" style={{ overflowY: 'auto' }}>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {content || "No content to preview."}
             </ReactMarkdown>
