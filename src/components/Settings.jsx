@@ -61,11 +61,12 @@ const Settings = ({ onAppBackgroundUpdate }) => {
       </aside>
 
       {/* Main Settings Content */}
-      <main className="settings-content-area">
-        {activeSection === 'profile' ? (
+      <main className="settings-content-area flex-column items-center">
+        <div style={{ width: '100%', maxWidth: '1000px' }}>
+          {activeSection === 'profile' ? (
           <>
             {/* Profile View */}
-            <div className="appearance-breadcrumb">
+            <div className="appearance-breadcrumb" style={{ marginBottom: '3.5rem' }}>
               My Account / <UserCircle size={14} /> Profile
             </div>
 
@@ -115,11 +116,11 @@ const Settings = ({ onAppBackgroundUpdate }) => {
         ) : (
           <>
             {/* Appearance View */}
-            <div className="appearance-breadcrumb">
+            <div className="appearance-breadcrumb" style={{ marginBottom: '3.5rem' }}>
               My Account / <Palette size={14} /> Appearance
             </div>
 
-            <div className="profile-header">
+            <div className="profile-header" style={{ marginBottom: '4rem' }}>
               <div className="profile-avatar flex items-center justify-center p-0" style={{ background: 'rgba(147, 51, 234, 0.1)', borderStyle: 'dashed' }}>
                 <Palette size={64} className="text-primary-light" />
               </div>
@@ -130,7 +131,7 @@ const Settings = ({ onAppBackgroundUpdate }) => {
             </div>
 
             {/* Background Section */}
-            <div className="details-card mb-10">
+            <div className="details-card" style={{ marginBottom: '4rem' }}>
               <div className="details-header flex items-center gap-2">
                 <Monitor size={18} className="text-secondary" />
                 Application Background
@@ -146,7 +147,7 @@ const Settings = ({ onAppBackgroundUpdate }) => {
             </div>
 
             {/* Font Section */}
-            <div className="details-card mb-10">
+            <div className="details-card" style={{ marginBottom: '4rem' }}>
               <div className="details-header flex items-center gap-2">
                 <Type size={18} className="text-secondary" />
                 Font Personalization
@@ -164,13 +165,14 @@ const Settings = ({ onAppBackgroundUpdate }) => {
             </div>
 
             {/* Reset Button */}
-            <div className="mt-10">
+            <div className="mt-10" style={{ marginBottom: '4rem' }}>
               <button className="btn-glass" onClick={() => onAppBackgroundUpdate(null)} style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                 Reset to Default Vertex Mesh
               </button>
             </div>
           </>
         )}
+        </div>
       </main>
     </div>
   );
