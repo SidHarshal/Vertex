@@ -445,15 +445,69 @@ h1, h2, h3 {
 
 .editor-content {
   flex: 1;
-  padding: 2rem;
+  padding: 2.5rem;
   font-family: var(--font-mono);
   font-size: 1rem;
   color: var(--text-main);
-  line-height: 1.6;
+  line-height: 1.7;
   outline: none;
   background: transparent;
   border: none;
   resize: none;
+  scroll-padding-top: 1rem;
+}
+
+.preview-content {
+  flex: 1;
+  padding: 2.5rem 4rem;
+  overflow-y: auto;
+  color: var(--text-main);
+  line-height: 1.8;
+  font-family: var(--font-sans);
+}
+
+.preview-content h1, 
+.preview-content h2, 
+.preview-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.5rem;
+}
+
+.preview-content p {
+  margin-bottom: 1.5rem;
+}
+
+.preview-content ul, 
+.preview-content ol {
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.preview-content code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.preview-content pre {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--glass-border);
+}
+
+.preview-content blockquote {
+  border-left: 4px solid var(--primary-light);
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 2rem 0;
 }
 
 .editor-footer {

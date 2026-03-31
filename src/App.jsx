@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 
 // Components
@@ -12,6 +12,7 @@ import OnboardingScreen from './components/OnboardingScreen';
 function App() {
   const [isOnboarded, setIsOnboarded] = useState(false);
   const [activeFile, setActiveFile] = useState('welcome.md');
+  const [lastActiveNote, setLastActiveNote] = useState('welcome.md');
   const [content, setContent] = useState('# Welcome to Vertex\n\nThis is your space to innovate. Start writing your notes here...');
   const [notes, setNotes] = useState([
     { name: 'welcome.md', content: '# Welcome to Vertex\n\nThis is your space to innovate. Start writing your notes here...' },
@@ -19,16 +20,37 @@ function App() {
     { name: 'architecture.txt', content: 'Vertex Core Architecture\n- React Frontend\n- Vite Build System\n- Glassmorphism Design' }
   ]);
 
+  // Editor Mode State
+  const [isEditMode, setIsEditMode] = useState(true);
+
   // Sidebar Logic
   const [activeView, setActiveView] = useState('explorer');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
   const toggleView = (view) => {
+    if (activeFile === 'Settings') {
+      setActiveFile(lastActiveNote);
+      setActiveView(view);
+      setIsSidebarOpen(true);
+      return;
+    }
+
     if (activeView === view) {
       setIsSidebarOpen(!isSidebarOpen);
     } else {
       setActiveView(view);
+      setIsSidebarOpen(true);
+    }
+  };
+
+  const openSettings = () => {
+    if (activeFile !== 'Settings') {
+      setLastActiveNote(activeFile);
+      setActiveFile('Settings');
+      setIsSidebarOpen(false); 
+    } else {
+      setActiveFile(lastActiveNote);
       setIsSidebarOpen(true);
     }
   };
@@ -71,7 +93,9 @@ function App() {
   const selectFile = (fileName) => {
     const note = notes.find(n => n.name === fileName);
     setActiveFile(fileName);
+    setLastActiveNote(fileName);
     setContent(note.content);
+    setIsEditMode(true); // Default to edit mode on file open
   };
 
   if (!isOnboarded) {
@@ -87,7 +111,12 @@ function App() {
       <Header activeFile={activeFile} />
 
       {/* Activity Bar */}
-      <ActivityBar activeView={activeView} onViewToggle={toggleView} />
+      <ActivityBar 
+        activeView={activeView} 
+        activeFile={activeFile}
+        onViewToggle={toggleView} 
+        onSettingsClick={openSettings}
+      />
 
       {/* Sidebar / Explorer */}
       <Sidebar 
@@ -109,11 +138,16 @@ function App() {
       <EditorArea 
         activeFile={activeFile} 
         content={content} 
+        isEditMode={isEditMode}
+        onModeToggle={() => setIsEditMode(!isEditMode)}
         onContentChange={(val) => setContent(val)} 
       />
 
       {/* Footer */}
-      <Footer />
+      <Footer 
+        content={content} 
+        isEditMode={isEditMode}
+      />
     </div>
   );
 }
