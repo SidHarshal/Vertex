@@ -20,6 +20,9 @@ function App() {
     { name: 'architecture.txt', content: 'Vertex Core Architecture\n- React Frontend\n- Vite Build System\n- Glassmorphism Design' }
   ]);
 
+  // Appearance State
+  const [appBackground, setAppBackground] = useState(null);
+
   // Editor Mode State
   const [isEditMode, setIsEditMode] = useState(true);
 
@@ -95,7 +98,7 @@ function App() {
     setActiveFile(fileName);
     setLastActiveNote(fileName);
     setContent(note.content);
-    setIsEditMode(true); // Default to edit mode on file open
+    setIsEditMode(true);
   };
 
   if (!isOnboarded) {
@@ -105,8 +108,16 @@ function App() {
   return (
     <div 
       className={`editor-layout ${!isSidebarOpen ? 'collapsed' : ''}`} 
-      style={{ '--sidebar-width': `${sidebarWidth}px` }}
+      style={{ 
+        '--sidebar-width': `${sidebarWidth}px`,
+        backgroundImage: appBackground ? `url(${appBackground})` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundBlendMode: 'overlay'
+      }}
     >
+      <div className="mesh-bg" style={{ opacity: appBackground ? 0.3 : 1 }}></div>
+
       {/* Header */}
       <Header activeFile={activeFile} />
 
@@ -141,6 +152,7 @@ function App() {
         isEditMode={isEditMode}
         onModeToggle={() => setIsEditMode(!isEditMode)}
         onContentChange={(val) => setContent(val)} 
+        onAppBackgroundUpdate={setAppBackground}
       />
 
       {/* Footer */}
