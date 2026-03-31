@@ -337,8 +337,16 @@ h1, h2, h3 {
 
 .editor-tabs {
   display: flex;
+  align-items: center;
   background: rgba(0, 0, 0, 0.2);
-  height: 35px;
+  height: 38px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.tabs-container {
+  display: flex;
+  height: 100%;
 }
 
 .tab {
@@ -350,12 +358,63 @@ h1, h2, h3 {
   background: rgba(255, 255, 255, 0.02);
   color: var(--text-muted);
   cursor: pointer;
+  gap: 0.5rem;
 }
 
 .tab.active {
   background: var(--bg-deep);
   color: var(--text-main);
   border-top: 1px solid var(--primary-light);
+}
+
+.tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  opacity: 0.5;
+}
+
+.tab-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tab-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.tab-add:hover {
+  color: var(--text-main);
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  color: var(--text-muted);
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.action-btn:hover {
+  color: var(--primary-light);
 }
 
 .editor-content {

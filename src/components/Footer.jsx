@@ -1,15 +1,18 @@
 import React from 'react';
-import { IconBolt } from './Icons';
+import { Zap, TriangleAlert } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="editor-footer">
       <div className="flex gap-4">
         <div className="flex items-center gap-2">
-          <IconBolt />
+          <Zap size={14} />
           Main Branch
         </div>
-        <div>0 Errors</div>
+        <div className="flex items-center gap-1">
+          <TriangleAlert size={14} />
+           0 Errors
+        </div>
       </div>
       <div className="flex gap-4">
         <div>UTF-8</div>

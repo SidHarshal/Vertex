@@ -1,13 +1,13 @@
 import React from 'react';
-import { IconExplorer, IconSearch, IconSettings } from './Icons';
+import { Files, Search, Settings } from 'lucide-react';
 
 const ActivityBar = () => {
   return (
     <aside className="activity-bar">
-      <IconExplorer className="activity-icon active" />
-      <IconSearch className="activity-icon" />
+      <Files className="activity-icon active" size={24} />
+      <Search className="activity-icon" size={24} />
       <div style={{ marginTop: 'auto', marginBottom: '1rem' }}>
-        <IconSettings className="activity-icon" />
+        <Settings className="activity-icon" size={24} />
       </div>
     </aside>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconFile } from './Icons';
+import { FileText } from 'lucide-react';
 
 const Sidebar = ({ notes, activeFile, onSelectFile }) => {
   return (
@@ -12,7 +12,7 @@ const Sidebar = ({ notes, activeFile, onSelectFile }) => {
             className={`explorer-item ${activeFile === note.name ? 'active' : ''}`}
             onClick={() => onSelectFile(note.name)}
           >
-            <IconFile />
+            <FileText size={16} />
             {note.name}
           </div>
         ))}
