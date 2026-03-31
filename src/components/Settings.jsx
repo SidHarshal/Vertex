@@ -65,7 +65,7 @@ const Settings = ({ onAppBackgroundUpdate }) => {
         {activeSection === 'profile' ? (
           <>
             {/* Profile View */}
-            <div className="flex items-center gap-2 text-sm mb-10" style={{ opacity: 0.6 }}>
+            <div className="appearance-breadcrumb">
               My Account / <UserCircle size={14} /> Profile
             </div>
 
@@ -115,22 +115,22 @@ const Settings = ({ onAppBackgroundUpdate }) => {
         ) : (
           <>
             {/* Appearance View */}
-            <div className="flex items-center gap-2 text-sm mb-10" style={{ opacity: 0.6 }}>
+            <div className="appearance-breadcrumb">
               My Account / <Palette size={14} /> Appearance
             </div>
 
-            <h1 className="text-3xl mb-8 gradient-text">Appearance</h1>
+            <h1 className="text-4xl mb-10 gradient-text font-bold">Appearance</h1>
 
             {/* Background Section */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-6" style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.8rem' }}>
+              <div className="section-header">
                 <Monitor size={20} className="text-secondary" />
                 <h3 className="text-xl">Application Background</h3>
               </div>
-              <div className="glass p-6 text-center">
-                <p className="text-muted mb-4">Choose an image to customize your specialized workspace environment.</p>
-                <label className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Upload size={18} />
+              <div className="glass p-8 text-center" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                <p className="text-muted mb-6">Choose an image to customize your specialized workspace environment.</p>
+                <label className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.8rem', padding: '0.8rem 2.5rem' }}>
+                  <Upload size={20} />
                   Upload Photo
                   <input type="file" hidden accept="image/*" onChange={handleBackgroundUpload} />
                 </label>
@@ -139,26 +139,28 @@ const Settings = ({ onAppBackgroundUpdate }) => {
 
             {/* Font Section */}
             <section className="mb-10">
-              <div className="flex items-center gap-3 mb-6" style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.8rem' }}>
+              <div className="section-header">
                 <Type size={20} className="text-secondary" />
                 <h3 className="text-xl">Font Personalization</h3>
               </div>
-              <div className="grid gap-4">
-                <div className="glass p-4 border-primary-light" style={{ borderColor: 'var(--primary-light)', cursor: 'pointer' }}>
-                  <div className="font-bold">Inter (Default)</div>
-                  <div className="text-xs text-muted">Clean, modern geometric sans-serif.</div>
+              <div className="font-grid">
+                <div className="glass p-6 border-primary-light" style={{ borderColor: 'var(--primary-light)', cursor: 'pointer', background: 'rgba(255,255,255,0.02)' }}>
+                  <div className="font-bold text-lg mb-1">Inter (Default)</div>
+                  <div className="text-sm text-muted">Clean, modern geometric sans-serif for optimal readability.</div>
                 </div>
-                <div className="glass p-4 glass-hover" style={{ cursor: 'pointer' }}>
-                  <div className="font-bold" style={{ fontFamily: 'var(--font-mono)' }}>JetBrains Mono</div>
-                  <div className="text-xs text-muted">Specialized developer-centric typeface.</div>
+                <div className="glass p-6 glass-hover" style={{ cursor: 'pointer', background: 'rgba(255,255,255,0.02)' }}>
+                  <div className="font-bold text-lg mb-1" style={{ fontFamily: 'var(--font-mono)' }}>JetBrains Mono</div>
+                  <div className="text-sm text-muted">Specialized developer-centric typeface with improved ligatures.</div>
                 </div>
               </div>
             </section>
 
             {/* Reset Button */}
-            <button className="btn-glass" onClick={() => onAppBackgroundUpdate(null)} style={{ opacity: 0.6 }}>
-              Reset to Default Mesh
-            </button>
+            <div className="mt-10">
+              <button className="btn-glass" onClick={() => onAppBackgroundUpdate(null)} style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                Reset to Default Vertex Mesh
+              </button>
+            </div>
           </>
         )}
       </main>
