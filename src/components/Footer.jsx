@@ -25,10 +25,10 @@ const Footer = ({ content, isEditMode }) => {
           )}
         </div>
       </div>
-      <div className="flex gap-6 items-center">
-        <div className="flex gap-2">
-           <span className="text-muted">Ln:</span> {lineCount}
-           <span className="text-muted">Wd:</span> {wordCount}
+      <div className="flex gap-8 items-center">
+        <div className="flex gap-4">
+           <div><span className="text-muted">Ln:</span> {lineCount}</div>
+           <div><span className="text-muted">Wd:</span> {wordCount}</div>
         </div>
         <div>UTF-8</div>
         <div>Spaces: 2</div>
